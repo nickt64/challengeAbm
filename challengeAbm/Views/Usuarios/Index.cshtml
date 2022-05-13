@@ -1,0 +1,101 @@
+﻿@model Shared.ViewModels.UsuarioVM
+@{
+    ViewData["Title"] = "Usuarios";
+}
+<h1 class="modal-title">@ViewData["Title"]</h1>
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["mensaje"]
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+    </div>
+}
+
+<div class="container">
+    <div class="row ">
+        <div>
+            <h3>Listado Usuarios</h3>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class=" row ">
+        <div class="col-12">
+            <form asp-controller="usuarios" asp-action="Index" method="get">
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="estado" id="inlineRadio1" value="true">
+                    <label class="form-check-label" for="inlineRadio1">Dados de Baja</label>
+                </div>
+                <div class="col-1 form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="estado" id="inlineRadio2" value="false">
+                    <label class="form-check-label" for="inlineRadio2">Activos</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="estado" id="inlineRadio3" value="">
+                    <label class="form-check-label" for="inlineRadio3">Todos</label>
+                </div>
+                <div class=" form-check-inline">
+                    <button class="btn btn-primary form-check-inline" value="submit">Buscar</button>
+                </div>
+            </form>
+        </div>
+        <div class=" row col-2 justify-content-center">
+            <a class="btn btn-primary" asp-controller="Usuarios" asp-action="Edit">Crear</a>
+        </div>
+    </div>
+
+
+</div>
+
+
+<table class="table-bordered table table-striped text-center m-3">
+    <thead>
+        <tr>
+            <th>NombreCompleto</th>
+            <th>UserName</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in Model.ListaUsuarios)
+        {
+
+            <tr>
+                <td>@usuario.NombreCompleto</td>
+                <td>@usuario.UserName</td>
+                <td>@usuario.Email</td>
+                <td>@usuario.Telefono</td>
+                <td>@usuario.Estado</td>
+                <td>
+                    <div class="container">
+                        <div class="row ">
+                            <div class="col-6">
+                                <a class="btn btn-link" href="@Url.Action("Edit", "Usuarios", new { Id = usuario.Id})">Editar</a>
+                            </div>
+                            @if (!usuario.Borrado)
+                            {
+                                <div class="col-6">
+                                    <form asp-controller="Usuarios" asp-action="DeleteUsuario" asp-route-id="@usuario.Id" method="post">
+                                        <button class="btn btn-link" type="submit" value="submit">Eliminar</button>
+                                    </form>
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

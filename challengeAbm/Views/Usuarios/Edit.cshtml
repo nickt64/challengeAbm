@@ -1,0 +1,77 @@
+﻿@model Shared.Dtos.NuevoUsuarioDto
+@{
+    ViewData["Title"] = "Usuario";
+}
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm-12">
+            @if (Model.Id > 0)
+            {
+                <h3>Edicion Usuario</h3>
+            }
+            else
+            {
+                <h3>Creacion Usuario</h3>
+            }
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+
+            @using (Html.BeginForm("Edit", "Usuarios", FormMethod.Post, new { @class = "container" }))
+            {
+                @Html.ValidationSummary(false, "", new { @class="text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Nombre, new { @class="control-label" })
+                    @Html.TextBoxFor(x => x.Nombre, new { @class="form-control" })
+                    @Html.ValidationMessageFor(x => x.Nombre, "", new { @class="text-danger"})
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Apellido" class="control-label"></label>
+                    <input asp-for="Apellido" class="form-control" />
+                    <span asp-validation-for="Apellido" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Telefono" class="control-label"></label>
+                    <input asp-for="Telefono" class="form-control" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-1">
+
+                    <input type="submit" value="@(Model.Id > 0 ? "Guardar" : "Crear")" class="btn btn-primary flex-column" />
+
+                    @if (Model.Id > 0 && Model.Borrado)
+                    {
+                        @using (Html.BeginForm("ReActivar", "Usuarios", new { Id = Model.Id }, FormMethod.Post))
+                        {
+                           <input type="submit" value="Re-Activar" class="btn btn-warning flex-column" />    
+                        }
+                    }
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
