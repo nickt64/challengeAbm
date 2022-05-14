@@ -33,27 +33,27 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Apellido" class="control-label"></label>
-                    <input asp-for="Apellido" class="form-control" />
-                    <span asp-validation-for="Apellido" class="text-danger"></span>
+                    @Html.LabelFor(x => x.Apellido, new { @class="control-label" })
+                    @Html.TextBoxFor(x => x.Apellido, new { @class="form-control" })
+                    @Html.ValidationMessageFor(x => x.Apellido, "", new { @class="text-danger"})
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="UserName" class="control-label"></label>
-                    <input asp-for="UserName" class="form-control" />
-                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    @Html.LabelFor(x => x.UserName, new { @class="control-label" })
+                    @Html.TextBoxFor(x => x.UserName, new { @class="form-control" })
+                    @Html.ValidationMessageFor(x => x.UserName, "", new { @class="text-danger"})
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    @Html.LabelFor(x => x.Email, new { @class="control-label" })
+                    @Html.TextBoxFor(x => x.Email, new { @class="form-control" })
+                    @Html.ValidationMessageFor(x => x.Email, "", new { @class="text-danger"})
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Telefono" class="control-label"></label>
-                    <input asp-for="Telefono" class="form-control" />
-                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                    @Html.LabelFor(x => x.Telefono, new { @class="control-label" })
+                    @Html.TextBoxFor(x => x.Telefono, new { @class="form-control" })
+                    @Html.ValidationMessageFor(x => x.Telefono, "", new { @class="text-danger"})
                 </div>
 
                 <div class="form-group mt-1">
@@ -64,7 +64,7 @@
                     {
                         @using (Html.BeginForm("ReActivar", "Usuarios", new { Id = Model.Id }, FormMethod.Post))
                         {
-                           <input type="submit" value="Re-Activar" class="btn btn-warning flex-column" />    
+                            <input type="submit" value="Re-Activar" class="btn btn-warning flex-column" />
                         }
                     }
 
@@ -75,3 +75,8 @@
 </div>
 
 
+@section Scripts{
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
