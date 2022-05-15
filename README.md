@@ -20,6 +20,7 @@ modelo:     Usuario
       
 Se utilizó:
 
+    C#
     .Net 6
     Asp.Net (mvc)
     ORM Entity Framework Core
